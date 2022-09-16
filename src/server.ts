@@ -9,6 +9,7 @@ const prisma = new PrismaClient({
     log: ['query']
 })
 
+app.use(express.json());
 app.use(cors())
 
 app.get('/games', async (req, res) => {
@@ -35,7 +36,7 @@ app.post('/games/:id/ads', async (req, res) => {
             name,
             yearsPlaying, 
             discord,
-            weekDays,
+            weekDays: weekDays.join(','),
             hourStart: convertHourStringToMinutes(hourStart),
             hourEnd: convertHourStringToMinutes(hourEnd),
             useVoiceChannel
